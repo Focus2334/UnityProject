@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Exit : MonoBehaviour //Скрипт выхода из игры через кнопку "выйти" в меню
+// Скрипт выхода из игры через кнопку "выйти" в меню.
+public class Exit : MonoBehaviour 
 {
-    public void exit() //Метод выхода из игры
+    // Метод выхода из игры.
+    public void exit() 
     {
         Application.Quit();
     }

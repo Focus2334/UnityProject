@@ -1,9 +1,11 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class Restart : MonoBehaviour //Скрипт перезапуска игры через кнопку "Заново" в меню
+// Скрипт перезапуска игры через кнопку "Заново" в меню.
+public class Restart : MonoBehaviour 
 {
-    public void loadscene() //Загрузка сцены
+    // Загрузка сцены.
+    public void loadscene() 
     {
         SceneManager.LoadScene("SampleScene");
     }

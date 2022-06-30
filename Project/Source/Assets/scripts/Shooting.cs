@@ -1,17 +1,19 @@
 using UnityEngine;
 using System;
 
-public class Shooting : MonoBehaviour //Скрипт стрельбы; отвечает за уничтожение врагов, эффекты выстрела, регистрацию попаданий
+
+// Скрипт стрельбы; отвечает за уничтожение врагов, эффекты выстрела, регистрацию попаданий.
+public class Shooting : MonoBehaviour 
 {
     [SerializeField] Camera _camera;
-    [SerializeField] string Enemy;
-    [SerializeField] GameObject particle;
-    [SerializeField] GameObject Gun;
-    public static int points; //Кол-во уничтоженных врагов
+    [SerializeField] string _enemy;
+    [SerializeField] GameObject _particle;
+    [SerializeField] GameObject _gun;
+    public static int Points; // Кол-во уничтоженных врагов.
 
     private void Start()
     {
-        points = 0;
+        Points = 0;
     }
 
     private void Update()
@@ -23,17 +25,17 @@ public class Shooting : MonoBehaviour //Скрипт стрельбы; отвечает за уничтожение
             Physics.Raycast(ray, out hit, 1000f, LayerMask.GetMask("Default"));
             if (hit.collider != null)
             {
-                if (hit.collider.gameObject.tag == Enemy)
+                if (hit.collider.gameObject.tag == _enemy)
                 {
-                    if (hit.collider.gameObject.GetComponent<EventAi>().timer < 0)
+                    if (hit.collider.gameObject.GetComponent<EventAi>().Timer < 0)
                     {
                         hit.collider.gameObject.GetComponent<EventAi>().destroy();
-                        points += 1;
+                        Points += 1;
                     }
                     
                 }
             }
-            Instantiate<GameObject>(particle, Gun.transform.position + Gun.transform.forward, Gun.transform.rotation);
+            Instantiate<GameObject>(_particle, _gun.transform.position + _gun.transform.forward, _gun.transform.rotation);
         }
 
     }

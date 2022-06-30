@@ -2,29 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorOpen : MonoBehaviour //Скрипт анимации открытия двери
+// Скрипт анимации открытия двери.
+public class DoorOpen : MonoBehaviour 
 {
     float _angle;
-    public bool open = false; //Статус открыта/закрыта ли дверь
-    public bool switching = false; //Статус перехода в открытое/закрытое положение
+
+    // Статус открыта/закрыта ли дверь.
+    public bool Open = false;
+    
+    // Статус перехода в открытое/закрытое положение.
+    public bool Switching = false; 
 
     private void Update()
     {
-        if (open & _angle < 90)
+        if (Open && _angle < 90)
         {
             _angle += 100 * Time.deltaTime;
             transform.rotation = Quaternion.AngleAxis(_angle, Vector3.up);
-            switching = true;
+            Switching = true;
         }
-        if (open is false & _angle > 0)
+        if (Open is false && _angle > 0)
         {
             _angle -= 100 * Time.deltaTime;
             transform.rotation = Quaternion.AngleAxis(_angle, Vector3.up);
-            switching = true;
+            Switching = true;
         }
         if (_angle >= 90 || _angle <= 0)
         {
-            switching = false;
+            Switching = false;
         }
 
     }

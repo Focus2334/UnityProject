@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
+// Класс, отвечающий за вывод окна с информацией о победе.
 public class Win : MonoBehaviour
 {
     [SerializeField] GameObject _player;
@@ -17,7 +18,7 @@ public class Win : MonoBehaviour
             _button.enabled = true;
             uGUI.enabled = true;
             _text.enabled = true;
-            string text = uGUI.text + Shooting.points;
+            string text = uGUI.text + Shooting.Points;
             uGUI.text = text;
             Cursor.visible = true;
             Destroy(gameObject);

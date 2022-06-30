@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Lifetime : MonoBehaviour //Скрипт удаления частиц выстрела через промежуток времени
+// Скрипт удаления частиц выстрела через промежуток времени.
+public class Lifetime : MonoBehaviour 
 {
 
     float timer = 0.1f;

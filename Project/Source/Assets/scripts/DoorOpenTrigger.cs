@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DoorOpenTrigger : MonoBehaviour //Скрипт триггера взаимодействия игрока с дверью
+// Скрипт триггера взаимодействия игрока с дверью.
+public class DoorOpenTrigger : MonoBehaviour 
 {
-    [SerializeField] bool Open;
+    [SerializeField] bool _open;
     [SerializeField] GameObject doorSystem;
     [SerializeField] GameObject player;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == player && doorSystem.GetComponent<DoorOpen>().switching is false)
+        if (other.gameObject == player && doorSystem.GetComponent<DoorOpen>().Switching is false)
         {
-            doorSystem.GetComponent<DoorOpen>().open = Open;
+            doorSystem.GetComponent<DoorOpen>().Open = _open;
         }
     }
 }

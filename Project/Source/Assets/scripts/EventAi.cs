@@ -3,25 +3,28 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 
-
-public class EventAi : MonoBehaviour //Скрипт врагов. Отвечает за анимации, поведение ИИ, характеристики.
+// Скрипт врагов. Отвечает за анимации, поведение ИИ, характеристики.
+public class EventAi : MonoBehaviour
 {
     [SerializeField] private Animator _animation;
     [SerializeField] private GameObject _player;
     [SerializeField] private float _triggerDistance;
-    NavMeshAgent agent;
-    [SerializeField] bool idle = false;
+    NavMeshAgent _agent;
+    [SerializeField] bool _idle = false;
     List<Transform> points = new List<Transform>();
-    [SerializeField] GameObject pointsObject;
+    [SerializeField] GameObject _pointsObject;
     [SerializeField] GameObject _bloodParticle;
     private int _pointsNumber;
     private int _currentPoint;
-    public float timer = -1; //Таймер до уничтожения врага (по умолчанию -1 так как он еще не запущен)
+    // Таймер до уничтожения врага (по умолчанию -1 так как он еще не запущен).
+    public float Timer = -1;
+
     private float _attackDelay;
 
-    public void destroy() //Метод уничтожения врага, запускает анимацию смерти и таймер до уничтожения
+    // Метод уничтожения врага, запускает анимацию смерти и таймер до уничтожения.
+    public void destroy()
     {
-        timer = 0;
+        Timer = 0;
         _animation.SetBool("Patroling", false);
         _animation.SetBool("Chase", false);
         _animation.SetBool("Attack", false);
@@ -32,14 +35,14 @@ public class EventAi : MonoBehaviour //Скрипт врагов. Отвечает за анимации, пове
 
     private void Start()
     {
-        agent = _animation.GetComponent<NavMeshAgent>();
-        Transform pointsObjectTransform = pointsObject.transform;
+        _agent = _animation.GetComponent<NavMeshAgent>();
+        Transform pointsObjectTransform = _pointsObject.transform;
         foreach (Transform t in pointsObjectTransform)
         {
             points.Add(t);
             _pointsNumber += 1;
         }
-        agent.SetDestination(points[0].position);
+        _agent.SetDestination(points[0].position);
     }
     void Update()
     {
@@ -47,21 +50,21 @@ public class EventAi : MonoBehaviour //Скрипт врагов. Отвечает за анимации, пове
         {
             _attackDelay -= Time.deltaTime;
         }
-        if (timer > 0.8)
+        if (Timer > 0.8)
         {
             Destroy(gameObject);
         }
-        if (timer >= 0)
+        if (Timer >= 0)
         {
-            timer += Time.deltaTime;
+            Timer += Time.deltaTime;
             return;
         }
 
-        if (timer < 0)
+        if (Timer < 0)
         {
-            if (Vector3.Distance(transform.position, _player.transform.position) > _triggerDistance && idle is false)
+            if (Vector3.Distance(transform.position, _player.transform.position) > _triggerDistance && _idle is false)
             {
-                agent.SetDestination(points[_currentPoint].position);
+                _agent.SetDestination(points[_currentPoint].position);
                 _animation.SetBool("Patroling", true);
                 _animation.SetBool("Chase", false);
                 _animation.SetBool("Attack", false);
@@ -78,25 +81,25 @@ public class EventAi : MonoBehaviour //Скрипт врагов. Отвечает за анимации, пове
                     GameObject _bloodParticleOnScene = Instantiate(_bloodParticle, transform.position + transform.forward * 0.5f + transform.up, Quaternion.identity);
                     Destroy(_bloodParticleOnScene, 0.2f);
                 }
-                
-                
+
+
             }
             else if (Vector3.Distance(transform.position, _player.transform.position) > 1.4 && Vector3.Distance(transform.position, _player.transform.position) < _triggerDistance)
             {
                 _animation.SetBool("Patroling", false);
                 _animation.SetBool("Chase", true);
                 _animation.SetBool("Attack", false);
-                agent.SetDestination(_player.transform.position);
+                _agent.SetDestination(_player.transform.position);
             }
             else
             {
                 _animation.SetBool("Patroling", false);
                 _animation.SetBool("Chase", false);
                 _animation.SetBool("Attack", false);
-                agent.SetDestination(gameObject.transform.position);
+                _agent.SetDestination(gameObject.transform.position);
             }
         }
-            
+
 
     }
     private void OnTriggerEnter(Collider other)

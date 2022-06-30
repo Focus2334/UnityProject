@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class pointsManager : MonoBehaviour //—крипт вывода на экран информации о кол-ве поверженных врагов
+// —крипт вывода на экран информации о кол-ве поверженных врагов.
+public class pointsManager : MonoBehaviour 
 {
     public TextMeshProUGUI uGUI;
 
     void Update()
     {
-        uGUI.text = "”ничтожено:" + Shooting.points;
+        uGUI.text = "”ничтожено:" + Shooting.Points;
     }
 }

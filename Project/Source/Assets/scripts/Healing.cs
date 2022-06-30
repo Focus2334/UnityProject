@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Healing : MonoBehaviour //Скрипт пополнения здоровья при подборе лечащих сфер
+// Скрипт пополнения здоровья при подборе лечащих сфер.
+public class Healing : MonoBehaviour 
 {
     [SerializeField] GameObject _player;
 
@@ -10,7 +11,7 @@ public class Healing : MonoBehaviour //Скрипт пополнения здоровья при подборе ле
     {
         if (other.gameObject == _player)
         {
-            HealthManager.health += 20;
+            HealthManager.Health += 20;
             Destroy(gameObject);
         }
 

@@ -4,32 +4,40 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class HealthManager : MonoBehaviour //Скрипт изменения и отображения здоровья игрока
+// Скрипт изменения и отображения здоровья игрока.
+public class HealthManager : MonoBehaviour 
 {
-    public static int health; //Кол-во очков здоровья
-    public static bool over; //Статус смерти игрока (false - живой, true - уничтожен)
-    public TextMeshProUGUI uGUI; //ССылка на GUI с отображением очков здоровья
+    // Кол-во очков здоровья.
+    public static int Health;
+
+    // Статус смерти игрока (false - живой, true - уничтожен).
+    public static bool Over;
+
+    // ССылка на GUI с отображением очков здоровья.
+    public TextMeshProUGUI uGUI; 
 
 
     void Start()
     {
-        health = 100;
-        over = false;
+        Health = 100;
+        Over = false;
     }
     void Update()
     {
-        uGUI.text = "ОЗ " + health;
-        if (over)
+        uGUI.text = "ОЗ " + Health;
+        if (Over)
         {
             SceneManager.LoadScene("SampleScene");
         }
     }
-    public void Damage(int count) //Метод принятия и учёта урона, также отвечает за смену статуса смерти игрока
+
+    // Метод принятия и учёта урона, также отвечает за смену статуса смерти игрока.
+    public void Damage(int count) 
     {
-        health -= count;
-        if (health <= 0)
+        Health -= count;
+        if (Health <= 0)
         {
-            over = true;
+            Over = true;
         }
     }
 }
